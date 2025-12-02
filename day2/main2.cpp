@@ -41,37 +41,37 @@ int main()
         long long secondInt = std::stoll(secondStr.c_str());
         for(size_t i = firstInt;i <= secondInt;i++)
         {
-            std::string lol = std::to_string(i);
-            if(lol.length() % 2 == 0)
+            std::string id = std::to_string(i);
+            //std::cout << "id: " << id << "\n";
+            for(int j = 1;j<=id.length();j++)
             {
-                // begin to half the length-1 and half the length to half the length
-                std::string firstID = lol.substr(0, (lol.length()/2));
-                std::string secondID = lol.substr(lol.length()/2, lol.length()/2);
-                std::string val = "valid";
-                if(firstID == secondID)
+                std::string digits = id.substr(0,j);
+                bool isSame = false;
+                for(int k = digits.length();k <= id.length()-digits.length();k=k+digits.length())
                 {
-                    val = "invalid";
-                    invalidList.push_back(lol);
+                    isSame = true;
+                    //std::cout << "k: " << k << " " << "digits: " << digits << "!=" << id.substr(k,j) << "\n";
+                    if(digits != id.substr(k, j) || id.length() % j != 0)
+                    {
+                        isSame = false;
+                        break;
+                    }
                 }
-                //std::cout << lol << " " << firstID << " " << secondID << " -> " << val << "\n";
+                if(isSame)
+                {
+                    invalidList.push_back(id);
+                    std::cout << "ID gefunden: " << id << "\n";
+                    break;
+                }
             }
         }
-
     }
     long long num = 0;
     for(std::string str : invalidList)
     {
         num+= std::atoll(str.c_str());
     }
-    std::cout << "num: " << num;
-
-
-    /* 1227775554
-    for(std::string str : idList)
-    {
-        std::cout << str << "\n";
-    }
-    */
-
+    std::cout << "num: " << num << "\n";
+    file.close();
     return 0;
 }
