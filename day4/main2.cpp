@@ -66,12 +66,10 @@ int main()
       }
     }
 
-    lines.clear();
-    lines.insert(lines.begin(), next.begin(), next.end());
+    lines.assign(next.begin(), next.end());
 
     if (rollsRemoved == 0)
       break;
   }
-
   std::cout << rolls << "\n";
 }
